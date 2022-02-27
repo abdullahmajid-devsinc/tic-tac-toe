@@ -1,0 +1,32 @@
+# Use Ruby 2.6.3
+AllCops:
+  TargetRubyVersion: 2.6.3
+  TargetRailsVersion: 6.0
+  NewCops: enable
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+# There's no need to add documentation to each one of our classes
+Documentation:
+  Enabled: false
+
+# Lines shouldn't be longer than 120 characters
+Layout/LineLength:
+  Max: 120
+
+# Always use single quotes for strings
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# Use only 'raise', as opposed to 'fail', for exceptions
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+# Use arrays of symbols without %i
+Style/SymbolArray:
+  Enabled: true
+
+# Multi line have their place especially in expect { } statements
+Style/BlockDelimiters:
+  Enabled: false

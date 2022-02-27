@@ -1,0 +1,130 @@
+  [1m[35m (224.4ms)[0m  [1m[35mCREATE DATABASE "tick_tack_toe_development" ENCODING = 'unicode'[0m
+  [1m[35m (110.8ms)[0m  [1m[35mCREATE DATABASE "tick_tack_toe_test" ENCODING = 'unicode'[0m
+  [1m[35m (23.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20220227131227)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20220227131227)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (56.6ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "name" character varying DEFAULT '' NOT NULL, "player1_id" bigint NOT NULL, "player2_id" bigint NOT NULL, "winner_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ce992a984c"
+FOREIGN KEY ("player1_id")
+  REFERENCES "player1s" ("id")
+, CONSTRAINT "fk_rails_9bdaf85a77"
+FOREIGN KEY ("player2_id")
+  REFERENCES "player2s" ("id")
+, CONSTRAINT "fk_rails_125ca6ba56"
+FOREIGN KEY ("winner_id")
+  REFERENCES "winners" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (7.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20220227131227)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.9ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "name" character varying DEFAULT '' NOT NULL, "player1_id" bigint NOT NULL, "player2_id" bigint NOT NULL, "winner_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ce992a984c"
+FOREIGN KEY ("player1_id")
+  REFERENCES "player1s" ("id")
+, CONSTRAINT "fk_rails_9bdaf85a77"
+FOREIGN KEY ("player2_id")
+  REFERENCES "player2s" ("id")
+, CONSTRAINT "fk_rails_125ca6ba56"
+FOREIGN KEY ("winner_id")
+  REFERENCES "winners" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20220227131227)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (22.2ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "name" character varying DEFAULT '' NOT NULL, "player1_id" bigint NOT NULL, "player2_id" bigint NOT NULL, "winner_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ce992a984c"
+FOREIGN KEY ("player1_id")
+  REFERENCES "player1s" ("id")
+, CONSTRAINT "fk_rails_9bdaf85a77"
+FOREIGN KEY ("player2_id")
+  REFERENCES "player2s" ("id")
+, CONSTRAINT "fk_rails_125ca6ba56"
+FOREIGN KEY ("winner_id")
+  REFERENCES "winners" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20220227131227)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (29.6ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "name" character varying DEFAULT '' NOT NULL, "player1_id" bigint NOT NULL, "player2_id" bigint NOT NULL, "winner_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ce992a984c"
+FOREIGN KEY ("player1_id")
+  REFERENCES "players" ("id")
+, CONSTRAINT "fk_rails_9bdaf85a77"
+FOREIGN KEY ("player2_id")
+  REFERENCES "players" ("id")
+, CONSTRAINT "fk_rails_125ca6ba56"
+FOREIGN KEY ("winner_id")
+  REFERENCES "winners" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20220227131227)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.5ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "name" character varying DEFAULT '' NOT NULL, "player1_id" bigint NOT NULL, "player2_id" bigint NOT NULL, "winner_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_ce992a984c"
+FOREIGN KEY ("player1_id")
+  REFERENCES "players" ("id")
+, CONSTRAINT "fk_rails_9bdaf85a77"
+FOREIGN KEY ("player2_id")
+  REFERENCES "players" ("id")
+, CONSTRAINT "fk_rails_125ca6ba56"
+FOREIGN KEY ("winner_id")
+  REFERENCES "players" ("id")
+)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX "index_players_on_player1_id" ON "players" ("player1_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_players_on_player2_id" ON "players" ("player2_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_players_on_winner_id" ON "players" ("winner_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220227131227"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBoards (20220227133913)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBoards (20220227133913)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.3ms)[0m  [1m[35mCREATE TABLE "boards" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220227133913"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMoves (20220227133926)
+  [1m[36mTRANSACTION (5.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "moves" ("id" bigserial primary key, "player_id" bigint NOT NULL, "cell" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_28a8ec35f5"
+FOREIGN KEY ("player_id")
+  REFERENCES "players" ("id")
+)[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE INDEX "index_moves_on_player_id" ON "moves" ("player_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220227133926"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (14.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-02-27 13:55:32.202871"], ["updated_at", "2022-02-27 13:55:32.202871"]]
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5329168887031914960)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5329168887031914960)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-02-27 20:27:30 +0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dev/.rvm/gems/ruby-2.6.3/gems/railties-6.1.4.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dev/.rvm/gems/ruby-2.6.3/gems/railties-6.1.4.6/lib/rails/templates/rails/welcome/index.html.erb (Duration: 9.0ms | Allocations: 516)
+Completed 200 OK in 58ms (Views: 16.3ms | ActiveRecord: 0.0ms | Allocations: 4194)
+
+
