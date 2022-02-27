@@ -8,6 +8,7 @@
 * Ruby 2.6.3 (bundler v2)
 * Ruby on Rails 6.1.x
 * PostgreSQL 13.6
+* React 17
 
 ## Setting up the development environment
 1.  Get the code. Clone this git repository and check out the latest release:
