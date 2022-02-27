@@ -1560,3 +1560,340 @@ Processing by Api::V1::MovesController#create as HTML
 Completed 200 OK in 24ms (Views: 0.4ms | ActiveRecord: 10.8ms | Allocations: 9177)
 
 
+Started POST "/api/v1/boards/" for ::1 at 2022-02-28 04:27:03 +0500
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::BoardsController#create as HTML
+  Parameters: {"player1"=>"p1", "player2"=>"p2", "board"=>{}}
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/boards_controller.rb:19:in `set_players'
+  [1m[36mPlayer Load (1.3ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = $1 LIMIT $2[0m  [["name", "p1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/boards_controller.rb:19:in `set_players'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = $1 LIMIT $2[0m  [["name", "p2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/boards_controller.rb:20:in `set_players'
+  [1m[36mBoard Create (14.6ms)[0m  [1m[32mINSERT INTO "boards" ("player1_id", "player2_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["player1_id", 1], ["player2_id", 2], ["created_at", "2022-02-27 23:27:04.090939"], ["updated_at", "2022-02-27 23:27:04.090939"]]
+  ↳ app/controllers/api/v1/boards_controller.rb:9:in `block in create'
+  [1m[36mTRANSACTION (13.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/boards_controller.rb:7:in `create'
+Completed 200 OK in 85ms (Views: 1.7ms | ActiveRecord: 45.4ms | Allocations: 11341)
+
+
+Started OPTIONS "/api/v1/boards/20/moves" for ::1 at 2022-02-28 04:27:05 +0500
+Started POST "/api/v1/boards/20/moves" for ::1 at 2022-02-28 04:27:05 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>4}, "board_id"=>"20"}
+  [1m[36mBoard Load (7.3ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (1.5ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 20], ["cell", 4], ["created_at", "2022-02-27 23:27:05.213479"], ["updated_at", "2022-02-27 23:27:05.213479"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 3], ["cell", 4], ["cell", 5], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 1], ["cell", 4], ["cell", 7], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 4], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 2], ["cell", 4], ["cell", 6], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 78ms (Views: 0.2ms | ActiveRecord: 25.6ms | Allocations: 14329)
+
+
+Started POST "/api/v1/boards/20/moves" for ::1 at 2022-02-28 04:27:05 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>2, "cell"=>2}, "board_id"=>"20"}
+  [1m[36mBoard Load (1.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (0.9ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 2], ["board_id", 20], ["cell", 2], ["created_at", "2022-02-27 23:27:06.006969"], ["updated_at", "2022-02-27 23:27:06.006969"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 1], ["cell", 2], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 2], ["cell", 5], ["cell", 8], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 2], ["cell", 4], ["cell", 6], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.9ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 21ms (Views: 0.2ms | ActiveRecord: 9.9ms | Allocations: 7178)
+
+
+Started POST "/api/v1/boards/20/moves" for ::1 at 2022-02-28 04:27:06 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>0}, "board_id"=>"20"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (1.0ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 20], ["cell", 0], ["created_at", "2022-02-27 23:27:06.609656"], ["updated_at", "2022-02-27 23:27:06.609656"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 1], ["cell", 2], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 3], ["cell", 6], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 4], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.9ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 9.6ms | Allocations: 7178)
+
+
+Started POST "/api/v1/boards/20/moves" for ::1 at 2022-02-28 04:27:09 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>2, "cell"=>6}, "board_id"=>"20"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (1.0ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 2], ["board_id", 20], ["cell", 6], ["created_at", "2022-02-27 23:27:09.723011"], ["updated_at", "2022-02-27 23:27:09.723011"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 6], ["cell", 7], ["cell", 8], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 3], ["cell", 6], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 2], ["cell", 4], ["cell", 6], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 19ms (Views: 0.2ms | ActiveRecord: 9.1ms | Allocations: 7178)
+
+
+Started POST "/api/v1/boards/20/moves" for ::1 at 2022-02-28 04:27:10 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>8}, "board_id"=>"20"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (1.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (1.0ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 20], ["cell", 8], ["created_at", "2022-02-27 23:27:10.374202"], ["updated_at", "2022-02-27 23:27:10.374202"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 6], ["cell", 7], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 2], ["cell", 5], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 20], ["cell", 0], ["cell", 4], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/move.rb:16:in `identify_winner'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/move.rb:16:in `identify_winner'
+  [1m[36mBoard Update (1.2ms)[0m  [1m[33mUPDATE "boards" SET "winner_id" = $1, "updated_at" = $2 WHERE "boards"."id" = $3[0m  [["winner_id", 1], ["updated_at", "2022-02-27 23:27:10.387589"], ["id", 20]]
+  ↳ app/models/move.rb:16:in `identify_winner'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+  [1m[36mPlayer Load (0.6ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 29ms (Views: 0.3ms | ActiveRecord: 11.8ms | Allocations: 11246)
+
+
+Started POST "/api/v1/boards/" for ::1 at 2022-02-28 04:27:28 +0500
+Processing by Api::V1::BoardsController#create as HTML
+  Parameters: {"player1"=>"p1", "player2"=>"p2", "board"=>{}}
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/boards_controller.rb:19:in `set_players'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = $1 LIMIT $2[0m  [["name", "p1"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/boards_controller.rb:19:in `set_players'
+  [1m[36mPlayer Load (0.7ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = $1 LIMIT $2[0m  [["name", "p2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/boards_controller.rb:20:in `set_players'
+  [1m[36mBoard Create (1.0ms)[0m  [1m[32mINSERT INTO "boards" ("player1_id", "player2_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["player1_id", 1], ["player2_id", 2], ["created_at", "2022-02-27 23:27:28.121274"], ["updated_at", "2022-02-27 23:27:28.121274"]]
+  ↳ app/controllers/api/v1/boards_controller.rb:9:in `block in create'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/boards_controller.rb:7:in `create'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 10.5ms | Allocations: 3619)
+
+
+Started OPTIONS "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:29 +0500
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:29 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>0}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (6.4ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 21], ["cell", 0], ["created_at", "2022-02-27 23:27:29.258428"], ["updated_at", "2022-02-27 23:27:29.258428"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 1], ["cell", 2], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 3], ["cell", 6], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 4], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 25ms (Views: 0.2ms | ActiveRecord: 13.5ms | Allocations: 7154)
+
+
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:30 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>2, "cell"=>2}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (0.8ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 2], ["board_id", 21], ["cell", 2], ["created_at", "2022-02-27 23:27:30.186196"], ["updated_at", "2022-02-27 23:27:30.186196"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 1], ["cell", 2], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 2], ["cell", 5], ["cell", 8], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 2], ["cell", 4], ["cell", 6], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 19ms (Views: 0.2ms | ActiveRecord: 8.9ms | Allocations: 7154)
+
+
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:31 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>8}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (0.9ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 21], ["cell", 8], ["created_at", "2022-02-27 23:27:31.186196"], ["updated_at", "2022-02-27 23:27:31.186196"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 6], ["cell", 7], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 2], ["cell", 5], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 4], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 9.0ms | Allocations: 7154)
+
+
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:33 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>2, "cell"=>3}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (0.7ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 2], ["board_id", 21], ["cell", 3], ["created_at", "2022-02-27 23:27:33.991442"], ["updated_at", "2022-02-27 23:27:33.991442"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 3], ["cell", 4], ["cell", 5], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 3], ["cell", 6], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 7.8ms | Allocations: 6359)
+
+
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:35 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>6}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (0.8ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 21], ["cell", 6], ["created_at", "2022-02-27 23:27:35.199593"], ["updated_at", "2022-02-27 23:27:35.199593"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 6], ["cell", 7], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 3], ["cell", 6], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 2], ["cell", 4], ["cell", 6], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 19ms (Views: 0.2ms | ActiveRecord: 9.2ms | Allocations: 7154)
+
+
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:35 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>2, "cell"=>4}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (0.8ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 2], ["board_id", 21], ["cell", 4], ["created_at", "2022-02-27 23:27:35.969433"], ["updated_at", "2022-02-27 23:27:35.969433"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 3], ["cell", 4], ["cell", 5], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 1], ["cell", 4], ["cell", 7], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 0], ["cell", 4], ["cell", 8], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 2], ["cell", 4], ["cell", 6], ["player_id", 2]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 21ms (Views: 0.2ms | ActiveRecord: 9.8ms | Allocations: 7949)
+
+
+Started POST "/api/v1/boards/21/moves" for ::1 at 2022-02-28 04:27:36 +0500
+Processing by Api::V1::MovesController#create as HTML
+  Parameters: {"move"=>{"player_id"=>1, "cell"=>7}, "board_id"=>"21"}
+  [1m[36mBoard Load (0.7ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:20:in `set_board'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mMove Create (1.0ms)[0m  [1m[32mINSERT INTO "moves" ("player_id", "board_id", "cell", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["player_id", 1], ["board_id", 21], ["cell", 7], ["created_at", "2022-02-27 23:27:36.592355"], ["updated_at", "2022-02-27 23:27:36.592355"]]
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "moves" WHERE "moves"."board_id" = $1 AND "moves"."cell" IN ($2, $3, $4) AND "moves"."player_id" = $5[0m  [["board_id", 21], ["cell", 6], ["cell", 7], ["cell", 8], ["player_id", 1]]
+  ↳ app/models/move.rb:14:in `block in identify_winner'
+  [1m[36mPlayer Load (0.9ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/move.rb:16:in `identify_winner'
+  [1m[36mPlayer Load (0.8ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/move.rb:16:in `identify_winner'
+  [1m[36mBoard Update (1.0ms)[0m  [1m[33mUPDATE "boards" SET "winner_id" = $1, "updated_at" = $2 WHERE "boards"."id" = $3[0m  [["winner_id", 1], ["updated_at", "2022-02-27 23:27:36.601089"], ["id", 21]]
+  ↳ app/models/move.rb:16:in `identify_winner'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/moves_controller.rb:10:in `create'
+  [1m[36mBoard Load (0.8ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+  [1m[36mPlayer Load (0.6ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/moves_controller.rb:11:in `create'
+Completed 200 OK in 25ms (Views: 0.3ms | ActiveRecord: 11.0ms | Allocations: 9109)
+
+
