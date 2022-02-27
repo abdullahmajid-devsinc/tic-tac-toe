@@ -16,32 +16,36 @@ ActiveRecord::Schema.define(version: 2022_02_27_133926) do
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "moves", force: :cascade do |t|
-    t.bigint "player_id", null: false
-    t.integer "cell"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_id"], name: "index_moves_on_player_id"
-  end
-
-  create_table "players", force: :cascade do |t|
-    t.string "name", default: "", null: false
     t.bigint "player1_id", null: false
     t.bigint "player2_id", null: false
     t.bigint "winner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["player1_id"], name: "index_players_on_player1_id"
-    t.index ["player2_id"], name: "index_players_on_player2_id"
-    t.index ["winner_id"], name: "index_players_on_winner_id"
+    t.index ["player1_id"], name: "index_boards_on_player1_id"
+    t.index ["player2_id"], name: "index_boards_on_player2_id"
+    t.index ["winner_id"], name: "index_boards_on_winner_id"
   end
 
+  create_table "moves", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "board_id", null: false
+    t.integer "cell"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_moves_on_board_id"
+    t.index ["player_id"], name: "index_moves_on_player_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_players_on_name", unique: true
+  end
+
+  add_foreign_key "boards", "players", column: "player1_id"
+  add_foreign_key "boards", "players", column: "player2_id"
+  add_foreign_key "boards", "players", column: "winner_id"
+  add_foreign_key "moves", "boards"
   add_foreign_key "moves", "players"
-  add_foreign_key "players", "players", column: "player1_id"
-  add_foreign_key "players", "players", column: "player2_id"
-  add_foreign_key "players", "players", column: "winner_id"
 end

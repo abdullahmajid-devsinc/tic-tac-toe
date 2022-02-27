@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
-class BoardsController < BaseController
-  before_action :set_players, only: :new
+module Api
+  module V1
+    class BoardsController < Api::BaseController
+      def create
+        ActiveRecord::Base.transaction do
+          set_players
+          board = Board.create!(player1: @player1, player2: @player2)
+          render json: board
+        end
+      rescue ActiveRecord::RecordInvalid => e
+        render json: e.message, status: :unprocessable_entity
+      end
 
-  def new
-    @board = Board.new(player1: @player1, player2: @player2)
-    if @board.save
-      render json: @board
-    else
-      render json: @board.errors, status: :unprocessable_entity
+      private
+
+      def set_players
+        @player1 = Player.find_or_create_by(name: params[:player1])
+        @player2 = Player.find_or_create_by(name: params[:player2])
+      end
     end
-  end
-
-  private
-
-  def set_players
-    @player1 = Player.find_or_create_by!(name: params[:player1])
-    @player2 = Player.find_or_create_by!(name: params[:player2])
   end
 end

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :players, only: :index
 
-      resources :board, only: [:new] do
-        resources :moved, only: %i[index create]
+      resources :boards, only: [:create] do
+        resources :moves, only: %i[index create]
       end
     end
   end
